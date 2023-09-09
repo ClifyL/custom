@@ -62,6 +62,23 @@ local plugins = {
   -- }
   {
     "lambdalisue/suda.vim"
+  },
+  {
+    "simrat39/rust-tools.nvim"
+  },
+  {
+    "nvim-lua/plenary.nvim"
+  },
+  {
+    "mfussenegger/nvim-dap"
+  },
+  {
+    "saecki/crates.nvim",
+    event = { "BufRead Cargo.toml" },
+    requires = { { 'nvim-lua/plenary.nvim' } },
+    config = function()
+        require('crates').setup()
+    end,
   }
 }
 
