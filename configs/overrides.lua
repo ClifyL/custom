@@ -12,6 +12,12 @@ M.treesitter = {
     "c",
     "markdown",
     "markdown_inline",
+    "python",
+    "rust",
+    "java",
+    "json",
+    "yaml",
+    "toml"
   },
   indent = {
     enable = true,
@@ -38,8 +44,6 @@ M.mason = {
     "clangd",
     "clang-format",
 
-    -- rust
-    "rust-analyzer",
 
   },
 }
