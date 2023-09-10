@@ -1,4 +1,4 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -25,7 +25,7 @@ local plugins = {
   -- override plugin configs
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason
+    opts = overrides.mason,
   },
 
   {
@@ -61,25 +61,75 @@ local plugins = {
   --   lazy = false,
   -- }
   {
-    "lambdalisue/suda.vim"
+    "lambdalisue/suda.vim",
   },
   {
-    "simrat39/rust-tools.nvim"
+    "simrat39/rust-tools.nvim",
   },
   {
-    "nvim-lua/plenary.nvim"
+    "nvim-lua/plenary.nvim",
   },
   {
-    "mfussenegger/nvim-dap"
+    "mfussenegger/nvim-dap",
   },
   {
     "saecki/crates.nvim",
     event = { "BufRead Cargo.toml" },
-    requires = { { 'nvim-lua/plenary.nvim' } },
+    requires = { { "nvim-lua/plenary.nvim" } },
     config = function()
-        require('crates').setup()
+      require("crates").setup()
     end,
-  }
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup {
+        panel = {
+          enabled = true,
+          auto_refresh = false,
+          keymap = {
+            jump_prev = "[[",
+            jump_next = "]]",
+            accept = "<CR>",
+            refresh = "gr",
+            open = "<M-CR>",
+          },
+          layout = {
+            position = "bottom", -- | top | left | right
+            ratio = 0.4,
+          },
+        },
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          debounce = 75,
+          keymap = {
+            accept = "<M-l>",
+            accept_word = false,
+            accept_line = false,
+            next = "<M-]>",
+            prev = "<M-[>",
+            dismiss = "<C-]>",
+          },
+        },
+        filetypes = {
+          yaml = false,
+          markdown = false,
+          help = false,
+          gitcommit = false,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
+          ["."] = false,
+        },
+        copilot_node_command = "node", -- Node.js version must be > 16.x
+        server_opts_overrides = {},
+      }
+    end,
+  },
 }
 
 return plugins
